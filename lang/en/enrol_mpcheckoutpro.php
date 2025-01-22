@@ -95,7 +95,7 @@ $string['privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro:auth_json'] = 
 $string['privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro:timeupdated'] = 'Time update.';
 $string['privacy:metadata:enrol_mpcheckoutpro:mercadopago'] = 'The extensión mercadopag, send informationtoweb mercadopago.';
 $string['verifypayment'] = '<div id="idpagomercadopago"><br>transaction has been received. We are in the process of verification, try course access in 45 minutes verify the income, otherwise contact the administrator.</div>';
-$string['paymentconfirm'] = 'Course paid, resume: <div id="resume"><br>payment id: "{$a->payment_id}"<br>paymen status: "{$a->payment_status}"<br>Detail Status: "{$a->payment_status_detail}"<br></div>';
+$string['paymentconfirm'] = 'Course paid, resume: <div id="resume"><br>payment id: "{$a->payment_id}"<br>paymen status: "{$a->payment_status}"<br>Userid: "{$a->userid}"<br></div>';
 $string['paymentreject'] = 'Thanks for your interest! Unfortunately, your payment has not been received.<br><br> reason: "{$a->payment_status}"<br>';
 $string['paymentsorry'] = 'Thanks for your interest! Unfortunately, your payment has not been confirmed at this time, once you make the payment, try to enter the course in 45 minutes, if you continue to have problems, please contact the site administrator attaching the payment receipt in your application and username moodle to review transaction <br> Payment status: "{$a->payment_status}"<br>';
 $string['messageprovider:mercadopago_enrolment'] = 'User enrol';

@@ -44,7 +44,7 @@ $data = new StdClass();
 $data->userid = $enrolmpcpro->userid;
 $data->courseid = $enrolmpcpro->courseid;
 $data->instanceid = $enrolmpcpro->instanceid;
-$data->payment_gross = $enrolmpcpro->payment_status;
+$data->payment_status = $enrolmpcpro->payment_status;
 
 $user = $DB->get_record(
     "user",
