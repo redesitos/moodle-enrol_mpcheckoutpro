@@ -22,15 +22,10 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version = 20250123268;
-$plugin->requires = 2019052000;
-$plugin->component = 'enrol_mpcheckoutpro';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '3.11';
-$plugin->cron = 60;
-$plugin->supported = [
-    37,
-    405
-];
+/**
+ * Sets up installation script.
+ *
+ * @return void
+ */
+function xmldb_enrol_mpcheckoutpro_install() {
+}

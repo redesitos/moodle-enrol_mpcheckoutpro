@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -8,21 +8,22 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
+ * This page handles responses from MercadoPago for failed payments.
  *
- * This files lists lang strings related to enrol_mpcheckoutpro.
- *
- * @package enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López  <jonathan.lopez.garcia@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   enrol_mpcheckoutpro
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 require_login();
 
 global $DB, $USER, $CFG;
@@ -33,17 +34,17 @@ $sdk = $this->get_config('sdk');
 $ipn = $this->get_config('ipn');
 
 $productinfo = $coursefullname;
-$referenceCode = $instance->courseid . $USER->id . rand();
+$referencecode = $instance->courseid . $USER->id . rand();
 $locale;
 $_SESSION['timestamp'] = $timestamp = time();
 $extra1 = $instance->courseid . '-' . $USER->id . '-' . $instance->id . '-' . $context->id;
 
 if (!class_exists('MercadoPago\SDK')) {
     if (file_exists('/var/www/vendor/autoload.php')) {
-        require_once('/var/www/vendor/autoload.php');
+        include_once('/var/www/vendor/autoload.php');
     }
     if (!class_exists('MercadoPago\SDK') && !empty($sdk) && file_exists($sdk)) {
-        require_once $sdk; // Fallback on custom sdk path
+        include_once($sdk); // Fallback on custom sdk path
     }
     if (!class_exists('MercadoPago\SDK')) {
         throw new Exception(get_string('sdkerr', 'enrol_mpcheckoutpro'));
@@ -60,7 +61,7 @@ $payer->date_created = date("Y-m-d H:i:s");
 
 $item = new MercadoPago\Item();
 $item->id = random_int(1000, 9999);
-$item->title = $referenceCode;
+$item->title = $referencecode;
 $item->description = $productinfo;
 $item->quantity = 1;
 $item->unit_price = (int) $instance->cost;
@@ -71,13 +72,13 @@ $preference = new MercadoPago\Preference();
 if ($item->currency_id == 'COP') {
     $payer->phone = array(
         "area_code" => "1",
-        "number" => "2926419"
+        "number" => "2926419",
     );
 
     $payer->address = array(
         "street_name" => "zona rosa",
         "street_number" => 68,
-        "zip_code" => "110111"
+        "zip_code" => "110111",
     );
     $locale = "es-CO";
 } else {
@@ -90,7 +91,7 @@ $preference->notification_url = $ipn;
 $preference->back_urls = array(
     "success" => $CFG->wwwroot . '/enrol/mpcheckoutpro/response.php',
     "failure" => $CFG->wwwroot . '/enrol/mpcheckoutpro/failure.php',
-    "pending" => $CFG->wwwroot . '/enrol/mpcheckoutpro/pending.php'
+    "pending" => $CFG->wwwroot . '/enrol/mpcheckoutpro/pending.php',
 );
 
 $preference->auto_return = "approved";

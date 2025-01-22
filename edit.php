@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -8,44 +8,55 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
+ * This page handles responses from MercadoPago for failed payments.
  *
- * This files lists lang strings related to enrol_mpcheckoutpro.
- *
- * @package enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   enrol_mpcheckoutpro
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 require('../../config.php');
 require_once('edit_form.php');
 
 $courseid = required_param('courseid', PARAM_INT);
 $instanceid = optional_param('id', 0, PARAM_INT);
 
-$course = $DB->get_record('course', array(
+$course = $DB->get_record(
+    'course',
+    array(
     'id' => $courseid
-), '*', MUST_EXIST);
+    ),
+    '*',
+    MUST_EXIST
+);
 $context = context_course::instance($course->id, MUST_EXIST);
 
 require_login($course);
+
 require_capability('enrol/mpcheckoutpro:config', $context);
 
-$PAGE->set_url('/enrol/mpcheckoutpro/edit.php', array(
+$PAGE->set_url(
+    '/enrol/mpcheckoutpro/edit.php',
+    array(
     'courseid' => $course->id,
-    'id' => $instanceid
-));
+    'id' => $instanceid,
+    )
+);
 $PAGE->set_pagelayout('admin');
 
-$return = new moodle_url('/enrol/instances.php', array(
+$return = new moodle_url(
+    '/enrol/instances.php',
+    array(
     'id' => $course->id
-));
+    )
+);
 if (!enrol_is_enabled('mpcheckoutpro')) {
     redirect($return);
 }
@@ -53,33 +64,46 @@ if (!enrol_is_enabled('mpcheckoutpro')) {
 $plugin = enrol_get_plugin('mpcheckoutpro');
 
 if ($instanceid) {
-    $instance = $DB->get_record('enrol', array(
+    $instance = $DB->get_record(
+        'enrol',
+        array(
         'courseid' => $course->id,
         'enrol' => 'mpcheckoutpro',
-        'id' => $instanceid
-    ), '*', MUST_EXIST);
+        'id' => $instanceid,
+        ),
+        '*',
+        MUST_EXIST
+    );
     $instance->cost = format_float($instance->cost, 2, true);
     $instance->customint1 = format_float($instance->customint1, 2, true);
 } else {
     require_capability('moodle/course:enrolconfig', $context);
 
-    navigation_node::override_active_url(new moodle_url('/enrol/instances.php', array(
-        'id' => $course->id
-    )));
+    navigation_node::override_active_url(
+        new moodle_url(
+            '/enrol/instances.php',
+            array(
+            'id' => $course->id
+            )
+        )
+    );
     $instance = new stdClass();
     $instance->id = null;
     $instance->courseid = $course->id;
 }
 
-$mform = new enrol_mpcheckoutpro_edit_form(null, array(
+$mform = new enrol_mpcheckoutpro_edit_form(
+    null,
+    array(
     $instance,
     $plugin,
     $context
-));
+    )
+);
 
 if ($mform->is_cancelled()) {
     redirect($return);
-} else if ($data = $mform->get_data()) {
+} elseif ($data = $mform->get_data()) {
     if ($instance->id) {
         $reset = ($instance->status != $data->status);
         $instance->status = $data->status;
@@ -107,7 +131,7 @@ if ($mform->is_cancelled()) {
             'roleid' => $data->roleid,
             'enrolperiod' => $data->enrolperiod,
             'enrolstartdate' => $data->enrolstartdate,
-            'enrolenddate' => $data->enrolenddate
+            'enrolenddate' => $data->enrolenddate,
         );
         $plugin->add_instance($course, $fields);
     }

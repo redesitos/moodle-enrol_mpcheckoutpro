@@ -22,15 +22,17 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+/**
+ * Upgrade the mpcheckoutpro enrolment plugin.
+ *
+ * @param int $oldversion The old version number of the plugin.
+ * @return bool True if the upgrade was successful, false otherwise.
+ */
+function xmldb_enrol_mpcheckoutpro_upgrade($oldversion) {
+    // upgrade function.
+    if ($oldversion < 20250123268) {
+        upgrade_plugin_savepoint(true, 20250123268, 'enrol', 'mpcheckoutpro');
+    }
 
-$plugin->version = 20250123268;
-$plugin->requires = 2019052000;
-$plugin->component = 'enrol_mpcheckoutpro';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '3.11';
-$plugin->cron = 60;
-$plugin->supported = [
-    37,
-    405
-];
+    return true;
+}

@@ -24,13 +24,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 20250123268;
-$plugin->requires = 2019052000;
-$plugin->component = 'enrol_mpcheckoutpro';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '3.11';
-$plugin->cron = 60;
-$plugin->supported = [
-    37,
-    405
-];
+$tasks = array(
+    array(
+        'classname' => '\enrol_mpcheckoutpro\task\process_expirations',
+        'blocking' => 0,
+        'minute' => '*',
+        'hour' => '*',
+        'day' => '*',
+        'month' => '*',
+        'dayofweek' => '*',
+        'disabled' => 0,
+    )
+);

@@ -22,15 +22,24 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace enrol_mpcheckoutpro\task;
 
-$plugin->version = 20250123268;
-$plugin->requires = 2019052000;
-$plugin->component = 'enrol_mpcheckoutpro';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '3.11';
-$plugin->cron = 60;
-$plugin->supported = [
-    37,
-    405
-];
+class process_expirations extends \core\task\scheduled_task {
+    /**
+     * Name for this task.
+     *
+     * @return string
+     */
+    public function get_name() {
+        return get_string('processexpirationstask', 'enrol_mpcheckoutpro');
+    }
+
+    /**
+     * Run task for processing expirations.
+     */
+    public function execute() {
+        $enrol = enrol_get_plugin('mpcheckoutpro');
+        $trace = new \text_progress_trace();
+        $enrol->process_expirations($trace);
+    }
+}
