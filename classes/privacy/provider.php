@@ -308,8 +308,6 @@ class provider implements
 
     public static function delete_data_for_users(approved_userlist $userlist)
     {
-        global $DB;
-
         $context = $userlist->get_context();
 
         if ($context->contextlevel != CONTEXT_COURSE) {

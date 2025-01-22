@@ -8,23 +8,23 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require "../../config.php";
-require_once "lib.php";
+require("../../config.php");
+require_once("lib.php");
 
 global $CFG;
 
 require_login();
 
-$payment_id = optional_param('payment_id', 0, PARAM_INT);
+$paymentid = optional_param('payment_id', 0, PARAM_INT);
 $status = optional_param('status', 'failed', PARAM_TEXT);
-$externalReference = optional_param('external_reference', 'none', PARAM_TEXT);
-$merchantOrderId = optional_param('merchant_order_id', 0, PARAM_INT);
+$externalreference = optional_param('external_reference', 'none', PARAM_TEXT);
+$merchantorderid = optional_param('merchant_order_id', 0, PARAM_INT);
 
 $a = new stdClass();
-if ($payment_id && $status && $externalReference && $merchantOrderId) {
-    $a->payment_status = "Payment ID: " . $payment_id . ", Status: " . $status .
-        ", External Reference: " . $externalReference .
-        ", Merchant Order ID: " . $merchantOrderId . ", Message: pending confirmation";
+if ($paymentid && $status && $externalreference && $merchantorderid) {
+    $a->payment_status = "Payment ID: " . $paymentid . ", Status: " . $status .
+        ", External Reference: " . $externalreference .
+        ", Merchant Order ID: " . $merchantorderid . ", Message: pending confirmation";
 
 } else {
     $a->payment_status = "MercadoPago callback received with missing parameters. Message: failed payment";

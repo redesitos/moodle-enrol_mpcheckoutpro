@@ -32,5 +32,4 @@ defined('MOODLE_INTERNAL') || die();
  */
 function xmldb_enrol_mpcheckoutpro_install()
 {
-    global $CFG, $DB;
 }
