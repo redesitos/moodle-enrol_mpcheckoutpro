@@ -11,27 +11,31 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 // See the GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
- *
- * This files lists lang strings related to enrol_mpcheckoutpro.
+ * Upgrade code for install
  *
  * @package   enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @copyright Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 20250123266;
-$plugin->requires = 2019052000;
-$plugin->component = 'enrol_mpcheckoutpro';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '3.11';
-$plugin->cron = 60;
-$plugin->supported = [
-    37,
-    405
-];
+/*
+ * Upgrade the untoken oauth2 plugin.
+ *
+ * @param int $oldversion The old version of the user tours plugin
+ * @return bool
+ */
+function xmldb_enrol_mpcheckoutpro_upgrade($oldversion)
+{
+    // upgrade function.
+    if ($oldversion < 20250123266) {
+        upgrade_plugin_savepoint(true, 20250123266, 'enrol', 'mpcheckoutpro');
+    }
+
+    return true;
+}
+

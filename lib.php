@@ -19,9 +19,9 @@
  *
  * This files lists lang strings related to enrol_mpcheckoutpro.
  *
- * @package enrol_mpcheckoutpro
+ * @package   enrol_mpcheckoutpro
  * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
  * Sets up essential methods for plugin.
  *
  * @copyright 2017 Exam Tutor, Venkatesan R Iyengar
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class enrol_mpcheckoutpro_plugin extends enrol_plugin
 {
@@ -67,7 +67,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * we might want to prevent icon repetition when multiple instances
      * of one type exist. One instance may also produce several icons.
      *
-     * @param array $instances
+     * @param  array $instances
      *            all enrol instances of this type in one course
      * @return array of pix_icon
      */
@@ -92,7 +92,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
     /**
      * Defines if user can be unenrolled.
      *
-     * @param stdClass $instance
+     * @param  stdClass $instance
      *            of the plugin
      * @return bool(true or false)
      */
@@ -105,7 +105,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
     /**
      * Defines if user can be managed from admin.
      *
-     * @param stdClass $instance
+     * @param  stdClass $instance
      *            of the plugin
      * @return bool(true or false)
      */
@@ -118,7 +118,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
     /**
      * Defines if 'enrol me' link will be shown on course page.
      *
-     * @param stdClass $instance
+     * @param  stdClass $instance
      *            of the plugin
      * @return bool(true or false)
      */
@@ -132,8 +132,8 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      *
      * By defaults looks for manage links only.
      *
-     * @param navigation_node $instancesnode
-     * @param stdClass $instance
+     * @param  navigation_node $instancesnode
+     * @param  stdClass        $instance
      * @return void
      */
     public function add_course_navigation($instancesnode, stdClass $instance)
@@ -144,10 +144,12 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
 
         $context = context_course::instance($instance->courseid);
         if (has_capability('enrol/mpcheckoutpro:config', $context)) {
-            $managelink = new moodle_url('/enrol/mpcheckoutpro/edit.php', array(
+            $managelink = new moodle_url(
+                '/enrol/mpcheckoutpro/edit.php', array(
                 'courseid' => $instance->courseid,
                 'id' => $instance->id
-            ));
+                )
+            );
             $instancesnode->add($this->get_instance_name($instance), $managelink, navigation_node::TYPE_SETTING);
         }
     }
@@ -155,7 +157,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
     /**
      * Returns edit icons for the page with list of instances
      *
-     * @param stdClass $instance
+     * @param  stdClass $instance
      * @return array
      */
     public function get_action_icons(stdClass $instance)
@@ -170,13 +172,19 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         $icons = array();
 
         if (has_capability('enrol/mpcheckoutpro:config', $context)) {
-            $editlink = new moodle_url("/enrol/mpcheckoutpro/edit.php", array(
+            $editlink = new moodle_url(
+                "/enrol/mpcheckoutpro/edit.php", array(
                 'courseid' => $instance->courseid,
                 'id' => $instance->id
-            ));
-            $icons[] = $OUTPUT->action_icon($editlink, new pix_icon('t/edit', get_string('edit'), 'core', array(
-                'class' => 'iconsmall'
-            )));
+                )
+            );
+            $icons[] = $OUTPUT->action_icon(
+                $editlink, new pix_icon(
+                    't/edit', get_string('edit'), 'core', array(
+                    'class' => 'iconsmall'
+                    )
+                )
+            );
         }
 
         return $icons;
@@ -185,7 +193,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
     /**
      * Returns link to page which may be used to add new instance of enrolment plugin in course.
      *
-     * @param int $courseid
+     * @param  int $courseid
      * @return moodle_url page url
      */
     public function get_newinstance_link($courseid)
@@ -197,9 +205,11 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         }
 
         // Multiple instances supported - different cost for different roles.
-        return new moodle_url('/enrol/mpcheckoutpro/edit.php', array(
+        return new moodle_url(
+            '/enrol/mpcheckoutpro/edit.php', array(
             'courseid' => $courseid
-        ));
+            )
+        );
     }
 
     /**
@@ -207,7 +217,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * and enrols user if necessary.
      * It can also redirect.
      *
-     * @param stdClass $instance
+     * @param  stdClass $instance
      * @return string html text, usually a form in a text box
      */
     public function enrol_page_hook(stdClass $instance)
@@ -215,11 +225,12 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         global $CFG, $USER, $OUTPUT, $PAGE, $DB;
         ob_start();
 
-        if (
-            $DB->record_exists('user_enrolments', array(
+        if ($DB->record_exists(
+            'user_enrolments', array(
                 'userid' => $USER->id,
                 'enrolid' => $instance->id
-            ))
+            )
+        )
         ) {
             return ob_get_clean();
         }
@@ -232,14 +243,18 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
             return ob_get_clean();
         }
 
-        $course = $DB->get_record('course', array(
+        $course = $DB->get_record(
+            'course', array(
             'id' => $instance->courseid
-        ));
+            )
+        );
         $context = context_course::instance($course->id);
 
-        $shortname = format_string($course->shortname, true, array(
+        $shortname = format_string(
+            $course->shortname, true, array(
             'context' => $context
-        ));
+            )
+        );
         $strloginto = get_string("loginto", "", $shortname);
         $strcourses = get_string("courses");
 
@@ -282,9 +297,11 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
                 echo '</div>';
             } else {
                 // Sanitise some fields before building the payment form.
-                $coursefullname = format_string($course->fullname, true, array(
+                $coursefullname = format_string(
+                    $course->fullname, true, array(
                     'context' => $context
-                ));
+                    )
+                );
                 $courseshortname = $shortname;
                 $userfullname = fullname($USER);
                 $userfirstname = $USER->firstname;
@@ -293,7 +310,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
                 $usercity = $USER->city;
                 $instancename = $this->get_instance_name($instance);
 
-                include($CFG->dirroot . '/enrol/mpcheckoutpro/enrolment_form.php');
+                include $CFG->dirroot . '/enrol/mpcheckoutpro/enrolment_form.php';
             }
         }
 
@@ -304,9 +321,9 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * Restore instance and map settings.
      *
      * @param restore_enrolments_structure_step $step
-     * @param stdClass $data
-     * @param stdClass $course
-     * @param int $oldid
+     * @param stdClass                          $data
+     * @param stdClass                          $course
+     * @param int                               $oldid
      */
     public function restore_instance(restore_enrolments_structure_step $step, stdClass $data, $course, $oldid)
     {
@@ -335,10 +352,10 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * Restore user enrolment.
      *
      * @param restore_enrolments_structure_step $step
-     * @param stdClass $data
-     * @param stdClass $instance
-     * @param int $userid
-     * @param int $oldinstancestatus
+     * @param stdClass                          $data
+     * @param stdClass                          $instance
+     * @param int                               $userid
+     * @param int                               $oldinstancestatus
      */
     public function restore_user_enrolment(restore_enrolments_structure_step $step, $data, $instance, $userid, $oldinstancestatus)
     {
@@ -348,8 +365,8 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
     /**
      * Gets an array of the user enrolment actions
      *
-     * @param course_enrolment_manager $manager
-     * @param stdClass $ue
+     * @param  course_enrolment_manager $manager
+     * @param  stdClass                 $ue
      *            A user enrolment object
      * @return array An array of user_enrolment_actions
      */
@@ -362,17 +379,21 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         $params['ue'] = $ue->id;
         if ($this->allow_unenrol($instance) && has_capability("enrol/mpcheckoutpro:unenrol", $context)) {
             $url = new moodle_url('/enrol/unenroluser.php', $params);
-            $actions[] = new user_enrolment_action(new pix_icon('t/delete', ''), get_string('unenrol', 'enrol'), $url, array(
+            $actions[] = new user_enrolment_action(
+                new pix_icon('t/delete', ''), get_string('unenrol', 'enrol'), $url, array(
                 'class' => 'unenrollink',
                 'rel' => $ue->id
-            ));
+                )
+            );
         }
         if ($this->allow_manage($instance) && has_capability("enrol/mpcheckoutpro:manage", $context)) {
             $url = new moodle_url('/enrol/editenrolment.php', $params);
-            $actions[] = new user_enrolment_action(new pix_icon('t/edit', ''), get_string('edit'), $url, array(
+            $actions[] = new user_enrolment_action(
+                new pix_icon('t/edit', ''), get_string('edit'), $url, array(
                 'class' => 'editenrollink',
                 'rel' => $ue->id
-            ));
+                )
+            );
         }
         return $actions;
     }
@@ -389,7 +410,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
     /**
      * Is it possible to delete enrol instance via standard UI?
      *
-     * @param stdClass $instance
+     * @param  stdClass $instance
      * @return bool
      */
     public function can_delete_instance($instance)
@@ -401,7 +422,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
     /**
      * Is it possible to hide/show enrol instance via standard UI?
      *
-     * @param stdClass $instance
+     * @param  stdClass $instance
      * @return bool
      */
     public function can_hide_show_instance($instance)

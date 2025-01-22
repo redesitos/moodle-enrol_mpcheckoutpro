@@ -19,9 +19,9 @@
  *
  * This files lists lang strings related to enrol_mpcheckoutpro.
  *
- * @package enrol_mpcheckoutpro
+ * @package   enrol_mpcheckoutpro
  * @copyright 2019 Jonathan López  <jonathan.lopez.garcia@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_login();
 
@@ -40,10 +40,10 @@ $extra1 = $instance->courseid . '-' . $USER->id . '-' . $instance->id . '-' . $c
 
 if (!class_exists('MercadoPago\SDK')) {
     if (file_exists('/var/www/vendor/autoload.php')) {
-        require_once('/var/www/vendor/autoload.php');
+        include_once '/var/www/vendor/autoload.php';
     }
     if (!class_exists('MercadoPago\SDK') && !empty($sdk) && file_exists($sdk)) {
-        require_once $sdk; // Fallback on custom sdk path
+        include_once $sdk; // Fallback on custom sdk path
     }
     if (!class_exists('MercadoPago\SDK')) {
         throw new Exception(get_string('sdkerr', 'enrol_mpcheckoutpro'));

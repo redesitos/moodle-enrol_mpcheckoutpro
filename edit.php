@@ -19,33 +19,39 @@
  *
  * This files lists lang strings related to enrol_mpcheckoutpro.
  *
- * @package enrol_mpcheckoutpro
+ * @package   enrol_mpcheckoutpro
  * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require('../../config.php');
-require_once('edit_form.php');
+require '../../config.php';
+require_once 'edit_form.php';
 
 $courseid = required_param('courseid', PARAM_INT);
 $instanceid = optional_param('id', 0, PARAM_INT);
 
-$course = $DB->get_record('course', array(
+$course = $DB->get_record(
+    'course', array(
     'id' => $courseid
-), '*', MUST_EXIST);
+    ), '*', MUST_EXIST
+);
 $context = context_course::instance($course->id, MUST_EXIST);
 
 require_login($course);
 require_capability('enrol/mpcheckoutpro:config', $context);
 
-$PAGE->set_url('/enrol/mpcheckoutpro/edit.php', array(
+$PAGE->set_url(
+    '/enrol/mpcheckoutpro/edit.php', array(
     'courseid' => $course->id,
     'id' => $instanceid
-));
+    )
+);
 $PAGE->set_pagelayout('admin');
 
-$return = new moodle_url('/enrol/instances.php', array(
+$return = new moodle_url(
+    '/enrol/instances.php', array(
     'id' => $course->id
-));
+    )
+);
 if (!enrol_is_enabled('mpcheckoutpro')) {
     redirect($return);
 }
@@ -53,29 +59,37 @@ if (!enrol_is_enabled('mpcheckoutpro')) {
 $plugin = enrol_get_plugin('mpcheckoutpro');
 
 if ($instanceid) {
-    $instance = $DB->get_record('enrol', array(
+    $instance = $DB->get_record(
+        'enrol', array(
         'courseid' => $course->id,
         'enrol' => 'mpcheckoutpro',
         'id' => $instanceid
-    ), '*', MUST_EXIST);
+        ), '*', MUST_EXIST
+    );
     $instance->cost = format_float($instance->cost, 2, true);
     $instance->customint1 = format_float($instance->customint1, 2, true);
 } else {
     require_capability('moodle/course:enrolconfig', $context);
 
-    navigation_node::override_active_url(new moodle_url('/enrol/instances.php', array(
-        'id' => $course->id
-    )));
+    navigation_node::override_active_url(
+        new moodle_url(
+            '/enrol/instances.php', array(
+            'id' => $course->id
+            )
+        )
+    );
     $instance = new stdClass();
     $instance->id = null;
     $instance->courseid = $course->id;
 }
 
-$mform = new enrol_mpcheckoutpro_edit_form(null, array(
+$mform = new enrol_mpcheckoutpro_edit_form(
+    null, array(
     $instance,
     $plugin,
     $context
-));
+    )
+);
 
 if ($mform->is_cancelled()) {
     redirect($return);

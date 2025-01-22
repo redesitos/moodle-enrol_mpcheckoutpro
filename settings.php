@@ -19,9 +19,9 @@
  *
  * This files lists lang strings related to enrol_mpcheckoutpro.
  *
- * @package enrol_mpcheckoutpro
+ * @package   enrol_mpcheckoutpro
  * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 require_login();

@@ -19,12 +19,12 @@
  *
  * This files lists lang strings related to enrol_mpcheckoutpro.
  *
- * @package enrol_mpcheckoutpro
+ * @package   enrol_mpcheckoutpro
  * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require("../../config.php");
-require_once("lib.php");
+require "../../config.php";
+require_once "lib.php";
 global $CFG;
 require_login();
 

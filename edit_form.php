@@ -19,19 +19,19 @@
  *
  * This files lists lang strings related to enrol_mpcheckoutpro.
  *
- * @package enrol_mpcheckoutpro
+ * @package   enrol_mpcheckoutpro
  * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir . '/formslib.php');
+require_once $CFG->libdir . '/formslib.php';
 
 /**
  * Sets up moodle edit form class methods.
  *
  * @copyright 2017 Exam Tutor, Venkatesan R Iyengar
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class enrol_mpcheckoutpro_edit_form extends moodleform
 {
@@ -65,15 +65,19 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
         $mform->addElement('select', 'status', get_string('status', 'enrol_mpcheckoutpro'), $options);
         $mform->setDefault('status', $plugin->get_config('status'));
 
-        $mform->addElement('text', 'cost', get_string('cost', 'enrol_mpcheckoutpro'), array(
+        $mform->addElement(
+            'text', 'cost', get_string('cost', 'enrol_mpcheckoutpro'), array(
             'size' => 4
-        ));
+            )
+        );
         $mform->setType('cost', PARAM_RAW); // Use unformat_float to get real value.
         $mform->setDefault('cost', format_float($plugin->get_config('cost'), 2, true));
 
-        $mform->addElement('text', 'tax', get_string('tax', 'enrol_mpcheckoutpro'), array(
+        $mform->addElement(
+            'text', 'tax', get_string('tax', 'enrol_mpcheckoutpro'), array(
             'size' => 4
-        ));
+            )
+        );
         $mform->setType('tax', PARAM_RAW); // Use unformat_float to get real value.
         $mform->setDefault('tax', format_float($plugin->get_config('tax'), 2, true));
 
@@ -89,22 +93,28 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
         $mform->addElement('select', 'roleid', get_string('assignrole', 'enrol_mpcheckoutpro'), $roles);
         $mform->setDefault('roleid', $plugin->get_config('roleid'));
 
-        $mform->addElement('duration', 'enrolperiod', get_string('enrolperiod', 'enrol_mpcheckoutpro'), array(
+        $mform->addElement(
+            'duration', 'enrolperiod', get_string('enrolperiod', 'enrol_mpcheckoutpro'), array(
             'optional' => true,
             'defaultunit' => 86400
-        ));
+            )
+        );
         $mform->setDefault('enrolperiod', $plugin->get_config('enrolperiod'));
         $mform->addHelpButton('enrolperiod', 'enrolperiod', 'enrol_mpcheckoutpro');
 
-        $mform->addElement('date_time_selector', 'enrolstartdate', get_string('enrolstartdate', 'enrol_mpcheckoutpro'), array(
+        $mform->addElement(
+            'date_time_selector', 'enrolstartdate', get_string('enrolstartdate', 'enrol_mpcheckoutpro'), array(
             'optional' => true
-        ));
+            )
+        );
         $mform->setDefault('enrolstartdate', 0);
         $mform->addHelpButton('enrolstartdate', 'enrolstartdate', 'enrol_mpcheckoutpro');
 
-        $mform->addElement('date_time_selector', 'enrolenddate', get_string('enrolenddate', 'enrol_mpcheckoutpro'), array(
+        $mform->addElement(
+            'date_time_selector', 'enrolenddate', get_string('enrolenddate', 'enrol_mpcheckoutpro'), array(
             'optional' => true
-        ));
+            )
+        );
         $mform->setDefault('enrolenddate', 0);
         $mform->addHelpButton('enrolenddate', 'enrolenddate', 'enrol_mpcheckoutpro');
 
@@ -128,8 +138,8 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
     /**
      * Sets up moodle form validation.
      *
-     * @param stdClass $data
-     * @param stdClass $files
+     * @param  stdClass $data
+     * @param  stdClass $files
      * @return $error error list
      */
     public function validation($data, $files)

@@ -1,0 +1,11 @@
+--2021-09-08 12:57:27--  https://media2.giphy.com/media/8lKyjU3F63hoa7KtOO/giphy.gif?cid=790b7611ddeca7aefeb4e437a71150ffe3ee341f42e66873
+Resolviendo media2.giphy.com (media2.giphy.com)... 199.232.194.2, 199.232.198.2
+Conectando con media2.giphy.com (media2.giphy.com)[199.232.194.2]:443... conectado.
+Petición HTTP enviada, esperando respuesta... 200 OK
+Longitud: 90442 (88K) [image/gif]
+Grabando a: “giphy.gif?cid=790b7611ddeca7aefeb4e437a71150ffe3ee341f42e66873”
+
+                   giphy.gif?cid=790b   0%[                                                                        ]       0  --.-KB/s               giphy.gif?cid=790b7611ddeca7aefeb4e43 100%[=======================================================================>]  88,32K  --.-KB/s    en 0,001s  
+
+2021-09-08 12:57:27 (81,7 MB/s) - “giphy.gif?cid=790b7611ddeca7aefeb4e437a71150ffe3ee341f42e66873” guardado [90442/90442]
+

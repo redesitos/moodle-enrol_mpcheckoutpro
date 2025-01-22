@@ -25,13 +25,6 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 20250123266;
-$plugin->requires = 2019052000;
-$plugin->component = 'enrol_mpcheckoutpro';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '3.11';
-$plugin->cron = 60;
-$plugin->supported = [
-    37,
-    405
-];
+$messageproviders = array(
+    'mpcheckoutpro_enrolment' => array()
+);
