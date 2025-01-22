@@ -25,23 +25,20 @@
 
 namespace enrol_mpcheckoutpro\task;
 
-class process_expirations extends \core\task\scheduled_task
-{
+class process_expirations extends \core\task\scheduled_task {
     /**
      * Name for this task.
      *
      * @return string
      */
-    public function get_name()
-    {
+    public function get_name() {
         return get_string('processexpirationstask', 'enrol_mpcheckoutpro');
     }
 
     /**
      * Run task for processing expirations.
      */
-    public function execute()
-    {
+    public function execute() {
         $enrol = enrol_get_plugin('mpcheckoutpro');
         $trace = new \text_progress_trace();
         $enrol->process_expirations($trace);

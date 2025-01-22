@@ -27,15 +27,13 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 
-class enrol_mpcheckoutpro_external extends external_api
-{
+class enrol_mpcheckoutpro_external extends external_api {
     /**
      * Returns description of method parameters.
      *
      * @return external_function_parameters
      */
-    public static function unenrol_users_parameters()
-    {
+    public static function unenrol_users_parameters() {
         return new external_function_parameters(
             array(
             'enrolments' => new external_multiple_structure(
@@ -63,8 +61,7 @@ class enrol_mpcheckoutpro_external extends external_api
      * @throws required_capability_exception
      * @throws restricted_context_exception
      */
-    public static function unenrol_users($enrolments)
-    {
+    public static function unenrol_users($enrolments) {
         global $CFG, $DB;
         $params = self::validate_parameters(
             self::unenrol_users_parameters(),
@@ -72,7 +69,7 @@ class enrol_mpcheckoutpro_external extends external_api
             'enrolments' => $enrolments
             )
         );
-        include_once $CFG->libdir . '/enrollib.php';
+        include_once($CFG->libdir . '/enrollib.php');
         $transaction = $DB->start_delegated_transaction(); // Rollback all enrolment if an error occurs.
         $enrol = enrol_get_plugin('manual');
         if (empty($enrol)) {
@@ -115,8 +112,7 @@ class enrol_mpcheckoutpro_external extends external_api
      *
      * @return null
      */
-    public static function unenrol_users_returns()
-    {
+    public static function unenrol_users_returns() {
         return null;
     }
 }

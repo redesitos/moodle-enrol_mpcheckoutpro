@@ -31,15 +31,13 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2017 Exam Tutor, Venkatesan R Iyengar
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class enrol_mpcheckoutpro_plugin extends enrol_plugin
-{
+class enrol_mpcheckoutpro_plugin extends enrol_plugin {
     /**
      * Lists all currencies available for plugin.
      *
      * @return $currencies
      */
-    public function get_currencies()
-    {
+    public function get_currencies() {
         $codes = array(
             'COP'
         );
@@ -51,8 +49,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         return $currencies;
     }
 
-    public function sync(progress_trace $trace)
-    {
+    public function sync(progress_trace $trace) {
         $this->process_expirations($trace);
         return 0;
     }
@@ -70,8 +67,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      *            all enrol instances of this type in one course
      * @return array of pix_icon
      */
-    public function get_info_icons(array $instances)
-    {
+    public function get_info_icons(array $instances) {
         return array(
             new pix_icon('icon', get_string('pluginname', 'enrol_mpcheckoutpro'), 'enrol_mpcheckoutpro')
         );
@@ -82,8 +78,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      *
      * @return bool(true or false)
      */
-    public function roles_protected()
-    {
+    public function roles_protected() {
         // Users with role assign cap may tweak the roles later.
         return false;
     }
@@ -95,8 +90,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      *            of the plugin
      * @return bool(true or false)
      */
-    public function allow_unenrol(stdClass $instance)
-    {
+    public function allow_unenrol(stdClass $instance) {
         // Users with unenrol cap may unenrol other users manually - requires enrol/mpcheckoutpro:unenrol.
         return true;
     }
@@ -108,8 +102,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      *            of the plugin
      * @return bool(true or false)
      */
-    public function allow_manage(stdClass $instance)
-    {
+    public function allow_manage(stdClass $instance) {
         // Users with manage cap may tweak period and status - requires enrol/mpcheckoutpro:manage.
         return true;
     }
@@ -121,8 +114,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      *            of the plugin
      * @return bool(true or false)
      */
-    public function show_enrolme_link(stdClass $instance)
-    {
+    public function show_enrolme_link(stdClass $instance) {
         return ($instance->status == ENROL_INSTANCE_ENABLED);
     }
 
@@ -135,8 +127,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * @param  stdClass        $instance
      * @return void
      */
-    public function add_course_navigation($instancesnode, stdClass $instance)
-    {
+    public function add_course_navigation($instancesnode, stdClass $instance) {
         if ($instance->enrol !== 'mpcheckoutpro') {
             throw new coding_exception('Invalid enrol instance type!');
         }
@@ -160,8 +151,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * @param  stdClass $instance
      * @return array
      */
-    public function get_action_icons(stdClass $instance)
-    {
+    public function get_action_icons(stdClass $instance) {
         global $OUTPUT;
 
         if ($instance->enrol !== 'mpcheckoutpro') {
@@ -201,8 +191,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * @param  int $courseid
      * @return moodle_url page url
      */
-    public function get_newinstance_link($courseid)
-    {
+    public function get_newinstance_link($courseid) {
         $context = context_course::instance($courseid, MUST_EXIST);
 
         if (!has_capability('moodle/course:enrolconfig', $context) or !has_capability('enrol/mpcheckoutpro:config', $context)) {
@@ -226,8 +215,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * @param  stdClass $instance
      * @return string html text, usually a form in a text box
      */
-    public function enrol_page_hook(stdClass $instance)
-    {
+    public function enrol_page_hook(stdClass $instance) {
         global $CFG, $USER, $OUTPUT, $PAGE, $DB;
         ob_start();
 
@@ -337,8 +325,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * @param stdClass                          $course
      * @param int                               $oldid
      */
-    public function restore_instance(restore_enrolments_structure_step $step, stdClass $data, $course, $oldid)
-    {
+    public function restore_instance(restore_enrolments_structure_step $step, stdClass $data, $course, $oldid) {
         global $DB;
         if ($step->get_task()->get_target() == backup::TARGET_NEW_COURSE) {
             $merge = false;
@@ -369,8 +356,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * @param int                               $userid
      * @param int                               $oldinstancestatus
      */
-    public function restore_user_enrolment(restore_enrolments_structure_step $step, $data, $instance, $userid, $oldinstancestatus)
-    {
+    public function restore_user_enrolment(restore_enrolments_structure_step $step, $data, $instance, $userid, $oldinstancestatus) {
         $this->enrol_user($instance, $userid, null, $data->timestart, $data->timeend, $data->status);
     }
 
@@ -382,8 +368,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      *            A user enrolment object
      * @return array An array of user_enrolment_actions
      */
-    public function get_user_enrolment_actions(course_enrolment_manager $manager, $ue)
-    {
+    public function get_user_enrolment_actions(course_enrolment_manager $manager, $ue) {
         $actions = array();
         $context = $manager->get_context();
         $instance = $ue->enrolmentinstance;
@@ -419,8 +404,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
     /**
      * Set up cron for the plugin (if any).
      */
-    public function cron()
-    {
+    public function cron() {
         $trace = new text_progress_trace();
         $this->process_expirations($trace);
     }
@@ -431,8 +415,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * @param  stdClass $instance
      * @return bool
      */
-    public function can_delete_instance($instance)
-    {
+    public function can_delete_instance($instance) {
         $context = context_course::instance($instance->courseid);
         return has_capability('enrol/mpcheckoutpro:config', $context);
     }
@@ -443,8 +426,7 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
      * @param  stdClass $instance
      * @return bool
      */
-    public function can_hide_show_instance($instance)
-    {
+    public function can_hide_show_instance($instance) {
         $context = context_course::instance($instance->courseid);
         return has_capability('enrol/mpcheckoutpro:config', $context);
     }

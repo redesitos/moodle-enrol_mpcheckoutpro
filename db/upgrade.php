@@ -23,11 +23,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/*
- * Upgrade the untoken oauth2 plugin.
+/**
+ * Upgrade the mpcheckoutpro enrolment plugin.
  *
- * @param int $oldversion The old version of the user tours plugin
- * @return bool
+ * @param int $oldversion The old version number of the plugin.
+ * @return bool True if the upgrade was successful, false otherwise.
  */
 function xmldb_enrol_mpcheckoutpro_upgrade($oldversion) {
     // upgrade function.

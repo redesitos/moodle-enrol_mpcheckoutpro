@@ -33,23 +33,21 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright 2017 Exam Tutor, Venkatesan R Iyengar
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class enrol_mpcheckoutpro_edit_form extends moodleform
-{
+class enrol_mpcheckoutpro_edit_form extends moodleform {
     /**
      * Sets up moodle form.
      *
      * @return void
      */
-    public function definition()
-    {
+    public function definition() {
         global $CFG;
 
         $mform = $this->_form;
 
         list($instance, $plugin, $context) = $this->_customdata;
 
-        $pix_icon = $CFG->wwwroot . '/enrol/mpcheckoutpro/pix/icon.png'; // Replace your_icon_name.png with the actual filename
-        $mform->addElement('html', '<div class="pix_icon"><img src="' . $pix_icon . '" alt="MP Icon" style="width:5%;" /></div>');
+        $pixicon = $CFG->wwwroot . '/enrol/mpcheckoutpro/pix/icon.png'; // Replace your_icon_name.png with the actual filename
+        $mform->addElement('html', '<div class="pix_icon"><img src="' . $pixicon . '" alt="MP Icon" style="width:5%;" /></div>');
         $mform->addElement('static', 'description', get_string('owner', 'enrol_mpcheckoutpro'), null);
         $mform->addElement('static', 'description', get_string('descriptionower', 'enrol_mpcheckoutpro'), null);
 
@@ -68,7 +66,7 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
             get_string('cost', 'enrol_mpcheckoutpro'),
             array(
             'size' => 4
-            )
+            ),
         );
         $mform->setType('cost', PARAM_RAW); // Use unformat_float to get real value.
         $mform->setDefault('cost', format_float($plugin->get_config('cost'), 2, true));
@@ -79,7 +77,7 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
             get_string('tax', 'enrol_mpcheckoutpro'),
             array(
             'size' => 4
-            )
+            ),
         );
         $mform->setType('tax', PARAM_RAW); // Use unformat_float to get real value.
         $mform->setDefault('tax', format_float($plugin->get_config('tax'), 2, true));
@@ -103,7 +101,7 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
             array(
             'optional' => true,
             'defaultunit' => 86400
-            )
+            ),
         );
         $mform->setDefault('enrolperiod', $plugin->get_config('enrolperiod'));
         $mform->addHelpButton('enrolperiod', 'enrolperiod', 'enrol_mpcheckoutpro');
@@ -114,7 +112,7 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
             get_string('enrolstartdate', 'enrol_mpcheckoutpro'),
             array(
             'optional' => true
-            )
+            ),
         );
         $mform->setDefault('enrolstartdate', 0);
         $mform->addHelpButton('enrolstartdate', 'enrolstartdate', 'enrol_mpcheckoutpro');
@@ -125,7 +123,7 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
             get_string('enrolenddate', 'enrol_mpcheckoutpro'),
             array(
             'optional' => true
-            )
+            ),
         );
         $mform->setDefault('enrolenddate', 0);
         $mform->addHelpButton('enrolenddate', 'enrolenddate', 'enrol_mpcheckoutpro');
@@ -138,7 +136,12 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
 
         if ($CFG->version >= '2013111801') {
             if (enrol_accessing_via_instance($instance)) {
-                $mform->addElement('static', 'selfwarn', get_string('instanceeditselfwarning', 'core_enrol'), get_string('instanceeditselfwarningtext', 'core_enrol'));
+                $mform->addElement(
+                    'static',
+                    'selfwarn',
+                    get_string('instanceeditselfwarning', 'core_enrol'),
+                    get_string('instanceeditselfwarningtext', 'core_enrol')
+                );
             }
         }
 
@@ -154,8 +157,7 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
      * @param  stdClass $files
      * @return $error error list
      */
-    public function validation($data, $files)
-    {
+    public function validation($data, $files) {
         global $DB, $CFG;
         $errors = parent::validation($data, $files);
 
