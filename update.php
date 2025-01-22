@@ -34,7 +34,7 @@ require_login();
 
 $id = required_param('id', PARAM_INT);
 
-$enrolmpcheckoutpro = $DB->get_record(
+$enrolmpcpro = $DB->get_record(
     "enrol_mpcheckoutpro",
     array(
     "id" => $id
@@ -42,10 +42,10 @@ $enrolmpcheckoutpro = $DB->get_record(
 );
 
 $data = new StdClass();
-$data->userid = $enrolmpcheckoutpro->userid;
-$data->courseid = $enrolmpcheckoutpro->courseid;
-$data->instanceid = $enrolmpcheckoutpro->instanceid;
-$data->payment_gross = $enrolmpcheckoutpro->payment_status;
+$data->userid = $enrolmpcpro->userid;
+$data->courseid = $enrolmpcpro->courseid;
+$data->instanceid = $enrolmpcpro->instanceid;
+$data->payment_gross = $enrolmpcpro->payment_status;
 
 $user = $DB->get_record(
     "user",
@@ -69,7 +69,7 @@ $context = context_course::instance($course->id, MUST_EXIST);
 
 $PAGE->set_context($context);
 
-$plugin_instance = $DB->get_record(
+$pluginst = $DB->get_record(
     "enrol",
     array(
     "id" => $data->instanceid,
@@ -82,16 +82,16 @@ $plugin_instance = $DB->get_record(
 
 $plugin = enrol_get_plugin('mpcheckoutpro');
 
-if ($plugin_instance->enrolperiod) {
+if ($pluginst->enrolperiod) {
     $timestart = time();
-    $timeend = $timestart + $plugin_instance->enrolperiod;
+    $timeend = $timestart + $pluginst->enrolperiod;
 } else {
     $timestart = 0;
     $timeend = 0;
 }
 
 // Enrol user
-$plugin->enrol_user($plugin_instance, $user->id, $plugin_instance->roleid, $timestart, $timeend);
+$plugin->enrol_user($pluginst, $user->id, $pluginst->roleid, $timestart, $timeend);
 
 // Pass $view=true to filter hidden caps if the user cannot see them
 if ($users = get_users_by_capability($context, 'moodle/course:update', 'u.*', 'u.id ASC', '', '', '', '', false, true)) {
