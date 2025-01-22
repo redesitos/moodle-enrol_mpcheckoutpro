@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -22,14 +23,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-/**
- * Sets up essential methods for plugin.
- *
- * @copyright 2017 Exam Tutor, Venkatesan R Iyengar
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class enrol_mpcheckoutpro_plugin extends enrol_plugin {
     /**
      * Lists all currencies available for plugin.

@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,7 +26,7 @@
 $string['pluginname'] = 'mpcheckoutpro';
 $string['pluginname_desc'] = 'The Mercadopago module allows you to set up paid courses.  If the cost for any course is zero, then students are not asked to pay for entry.  There is a site-wide cost that you set here as a default for the whole site and then a course setting that you can set for each course individually. The course cost overrides the site cost.';
 $string['owner'] = 'innovandoweb';
-$string['descriptionower'] = 'Mercadopago developed and maintained by jonathan';
+$string['descriptionower'] = 'Mercadopago developed and maintained by jonathan.lopez.garcia@gmail.com';
 $string['nocost'] = 'Not value defined, please update the value or change enrol method';
 $string['pkey'] = 'Account pkey merchant.';
 $string['publickey'] = 'Public key merchant.';

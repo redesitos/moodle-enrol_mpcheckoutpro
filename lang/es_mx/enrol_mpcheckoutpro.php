@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,7 +26,7 @@
 $string['pluginname'] = 'mpcheckoutpro';
 $string['pluginname_desc'] = 'El m&oacute;dulo Mercadopago le permite configurar cursos gestionando su matriculaci&oacute;n mediante un pago, si el costo de cualquier curso es cero, no se les pedir&aacute; a los estudiantes realizar pago por la entrada, en general para todo el sitio se puede establecer&aacute;n valor como predeterminado, tenga en cuenta que la configuraci&oacute;n en cada curso anula el costo definido para el sitio.';
 $string['owner'] = 'innovandoweb';
-$string['descriptionower'] = 'Mercadopago es desarrolado y mantenido por jonathan';
+$string['descriptionower'] = 'Mercadopago es desarrolado y mantenido por jonathan.lopez.garcia@gmail.com';
 $string['nocost'] = 'No hay un valor definido, debe actualizar el costo o cambiar el m&eacute;todo de inscripci&oacute;n';
 $string['tax'] = 'Impuesto $';
 $string['pkey'] = 'Llave del Integrador de comerciante.';
