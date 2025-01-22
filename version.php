@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 20250123268;
+$plugin->version = 2025012226;
 $plugin->requires = 2019052000;
 $plugin->component = 'enrol_mpcheckoutpro';
 $plugin->maturity = MATURITY_STABLE;
