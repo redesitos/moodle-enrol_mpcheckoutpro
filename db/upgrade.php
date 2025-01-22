@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -30,8 +31,8 @@
  */
 function xmldb_enrol_mpcheckoutpro_upgrade($oldversion) {
     // upgrade function.
-    if ($oldversion < 20250123266) {
-        upgrade_plugin_savepoint(true, 20250123266, 'enrol', 'mpcheckoutpro');
+    if ($oldversion < 20250123268) {
+        upgrade_plugin_savepoint(true, 20250123268, 'enrol', 'mpcheckoutpro');
     }
 
     return true;

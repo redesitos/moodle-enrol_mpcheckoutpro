@@ -23,12 +23,8 @@
 					NOTNULL="false" DEFAULT="0" SEQUENCE="false" />
 				<FIELD NAME="payment_status" TYPE="char" LENGTH="20"
 					NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
-				<FIELD NAME="payment_status_detail" TYPE="char" LENGTH="255"
-					NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
 				<FIELD NAME="external_reference" TYPE="char" LENGTH="255"
 					NOTNULL="true" SEQUENCE="false" />
-				<FIELD NAME="auth_json" TYPE="text" NOTNULL="false"
-					SEQUENCE="false" />
 				<FIELD NAME="timeupdated" TYPE="int" LENGTH="10"
 					NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
 			</FIELDS>
