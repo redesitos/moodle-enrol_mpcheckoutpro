@@ -1,5 +1,6 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -8,25 +9,24 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
- *
- * This files lists lang strings related to enrol_mpcheckoutpro.
+ * This page handles responses from MercadoPago for failed payments.
  *
  * @package   enrol_mpcheckoutpro
  * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require "../../config.php";
-require_once "lib.php";
-require_once $CFG->libdir . '/enrollib.php';
-require_once $CFG->libdir . '/filelib.php';
+
+require("../../config.php");
+require_once("lib.php");
+require_once($CFG->libdir . '/enrollib.php');
+require_once($CFG->libdir . '/filelib.php');
 
 global $DB, $CFG;
 
@@ -34,28 +34,35 @@ require_login();
 
 $id = required_param('id', PARAM_INT);
 
-$enrol_mpcheckoutpro = $DB->get_record(
-    "enrol_mpcheckoutpro", array(
+$enrolmpcheckoutpro = $DB->get_record(
+    "enrol_mpcheckoutpro",
+    array(
     "id" => $id
     )
 );
 
 $data = new StdClass();
-$data->userid = $enrol_mpcheckoutpro->userid;
-$data->courseid = $enrol_mpcheckoutpro->courseid;
-$data->instanceid = $enrol_mpcheckoutpro->instanceid;
-$data->payment_gross = $enrol_mpcheckoutpro->payment_status;
+$data->userid = $enrolmpcheckoutpro->userid;
+$data->courseid = $enrolmpcheckoutpro->courseid;
+$data->instanceid = $enrolmpcheckoutpro->instanceid;
+$data->payment_gross = $enrolmpcheckoutpro->payment_status;
 
 $user = $DB->get_record(
-    "user", array(
+    "user",
+    array(
     "id" => $data->userid
-    ), "*", MUST_EXIST
+    ),
+    "*",
+    MUST_EXIST
 );
 
 $course = $DB->get_record(
-    "course", array(
+    "course",
+    array(
     "id" => $data->courseid
-    ), "*", MUST_EXIST
+    ),
+    "*",
+    MUST_EXIST
 );
 
 $context = context_course::instance($course->id, MUST_EXIST);
@@ -63,11 +70,14 @@ $context = context_course::instance($course->id, MUST_EXIST);
 $PAGE->set_context($context);
 
 $plugin_instance = $DB->get_record(
-    "enrol", array(
+    "enrol",
+    array(
     "id" => $data->instanceid,
     "enrol" => "mpcheckoutpro",
     "status" => 0
-    ), "*", MUST_EXIST
+    ),
+    "*",
+    MUST_EXIST
 );
 
 $plugin = enrol_get_plugin('mpcheckoutpro');
@@ -92,7 +102,8 @@ if ($users = get_users_by_capability($context, 'moodle/course:update', 'u.*', 'u
 }
 
 if (!$course = $DB->get_record(
-    "course", array(
+    "course",
+    array(
         "id" => $data->courseid
     )
 )
@@ -100,7 +111,8 @@ if (!$course = $DB->get_record(
     redirect($CFG->wwwroot);
 }
 if (!$user = $DB->get_record(
-    "user", array(
+    "user",
+    array(
         "id" => $data->userid
     )
 )
@@ -116,7 +128,9 @@ if (!empty($SESSION->wantsurl)) {
 }
 
 $fullname = format_string(
-    $course->fullname, true, array(
+    $course->fullname,
+    true,
+    array(
     'context' => $context
     )
 );
@@ -124,10 +138,12 @@ $fullname = format_string(
 if (is_enrolled($context, $user, '', true)) { // TODO: use real pay check
     redirect(
         new moodle_url(
-            '/course/view.php', array(
+            '/course/view.php',
+            array(
             'id' => $course->id
             )
-        ), get_string('paymentthanks', '', $fullname)
+        ),
+        get_string('paymentthanks', '', $fullname)
     );
 } else { // / Somehow they aren't enrolled yet! :-(
     $PAGE->set_url($destination);
@@ -137,5 +153,3 @@ if (is_enrolled($context, $user, '', true)) { // TODO: use real pay check
     $a->fullname = $fullname;
     notice(get_string('paymentsorry', '', $a), $destination);
 }
-
-?>

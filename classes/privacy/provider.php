@@ -1,5 +1,6 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -8,21 +9,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
- *
- * This files lists lang strings related to enrol_mpcheckoutpro.
+ * This page handles responses from MercadoPago for failed payments.
  *
  * @package   enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace enrol_mpcheckoutpro\privacy;
 
 defined('MOODLE_INTERNAL') || die();
@@ -50,7 +50,6 @@ class provider implements
     // This plugin is capable of determining which users have data within it.
     \core_privacy\local\request\core_userlist_provider
 {
-
     /**
      * Returns meta data about this system.
      *
@@ -61,7 +60,8 @@ class provider implements
     public static function get_metadata(collection $collection): collection
     {
         $collection->add_external_location_link(
-            'mercadopago.co', [
+            'mercadopago.co',
+            [
             'preference_id' => 'privacy:metadata:enrol_mpcheckoutpro:mercadopago:preference_id',
             'courseid' => 'privacy:metadata:enrol_mpcheckoutpro:mercadopago:courseid',
             'userid' => 'privacy:metadata:enrol_mpcheckoutpro:mercadopago:userid',
@@ -74,12 +74,14 @@ class provider implements
             'payment_id' => 'privacy:metadata:enrol_mpcheckoutpro:mercadopago:payment_id',
             'auth_json' => 'privacy:metadata:enrol_mpcheckoutpro:mercadopago:auth_json',
             'timeupdated' => 'privacy:metadata:enrol_mpcheckoutpro:mercadopago:timeupdated'
-            ], 'privacy:metadata:enrol_mpcheckoutpro:mercadopago'
+            ],
+            'privacy:metadata:enrol_mpcheckoutpro:mercadopago'
         );
 
         // The enrol_mpcheckoutpro has a DB table that contains user data.
         $collection->add_database_table(
-            'enrol_mpcheckoutpro', [
+            'enrol_mpcheckoutpro',
+            [
             'preference_id' => 'privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro:preference_id',
             'courseid' => 'privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro:courseid',
             'userid' => 'privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro:userid',
@@ -92,7 +94,8 @@ class provider implements
             'payment_id' => 'privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro:payment_id',
             'auth_json' => 'privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro:auth_json',
             'timeupdated' => 'privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro:timeupdated'
-            ], 'privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro'
+            ],
+            'privacy:metadata:enrol_mpcheckoutpro:enrol_mpcheckoutpro'
         );
 
         return $collection;
@@ -204,7 +207,8 @@ class provider implements
                     writer::with_context($coursecontext)->export_data(
                         [
                         $strtransactions
-                        ], (object) [
+                        ],
+                        (object) [
                             'transactions' => $transactions
                         ]
                     );
@@ -242,7 +246,8 @@ class provider implements
             writer::with_context($coursecontext)->export_data(
                 [
                 $strtransactions
-                ], (object) [
+                ],
+                (object) [
                     'transactions' => $transactions
                 ]
             );
@@ -264,7 +269,8 @@ class provider implements
         }
 
         $DB->delete_records(
-            'enrol_mpcheckoutpro', array(
+            'enrol_mpcheckoutpro',
+            array(
             'courseid' => $context->instanceid
             )
         );
@@ -315,4 +321,3 @@ class provider implements
         }
     }
 }
-

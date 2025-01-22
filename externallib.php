@@ -1,5 +1,6 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -8,30 +9,26 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * External course participation api.
- *
- * This api is mostly read only, the actual enrol and unenrol
- * support is in each enrol plugin.
+ * This page handles responses from MercadoPago for failed payments.
  *
  * @package   enrol_mpcheckoutpro
- * @category  external
- * @copyright Innovandoweb
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die();
 
-require_once "$CFG->libdir/externallib.php";
+require_once("$CFG->libdir/externallib.php");
 
 class enrol_mpcheckoutpro_external extends external_api
 {
-
     /**
      * Returns description of method parameters.
      *
@@ -70,7 +67,8 @@ class enrol_mpcheckoutpro_external extends external_api
     {
         global $CFG, $DB;
         $params = self::validate_parameters(
-            self::unenrol_users_parameters(), array(
+            self::unenrol_users_parameters(),
+            array(
             'enrolments' => $enrolments
             )
         );
@@ -86,7 +84,8 @@ class enrol_mpcheckoutpro_external extends external_api
             self::validate_context($context);
             require_capability('enrol/manual:unenrol', $context);
             $instance = $DB->get_record(
-                'enrol', array(
+                'enrol',
+                array(
                 'courseid' => $enrolment['courseid'],
                 'enrol' => 'manual'
                 )
@@ -95,7 +94,8 @@ class enrol_mpcheckoutpro_external extends external_api
                 throw new moodle_exception('wsnoinstance', 'enrol_manual', $enrolment);
             }
             $user = $DB->get_record(
-                'user', array(
+                'user',
+                array(
                 'id' => $enrolment['userid']
                 )
             );

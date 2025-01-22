@@ -1,5 +1,6 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -8,36 +9,41 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
- *
- * This files lists lang strings related to enrol_mpcheckoutpro.
+ * This page handles responses from MercadoPago for failed payments.
  *
  * @package   enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require '../../config.php';
+
+require('../../config.php');
 
 $enrolid = required_param('enrolid', PARAM_INT);
 $confirm = optional_param('confirm', 0, PARAM_BOOL);
 
 $instance = $DB->get_record(
-    'enrol', array(
+    'enrol',
+    array(
     'id' => $enrolid,
     'enrol' => 'mpcheckoutpro'
-    ), '*', MUST_EXIST
+    ),
+    '*',
+    MUST_EXIST
 );
 $course = $DB->get_record(
-    'course', array(
+    'course',
+    array(
     'id' => $instance->courseid
-    ), '*', MUST_EXIST
+    ),
+    '*',
+    MUST_EXIST
 );
 $context = context_course::instance($course->id, MUST_EXIST);
 
@@ -53,7 +59,8 @@ $plugin = enrol_get_plugin('mpcheckoutpro');
 if (!$plugin->get_unenrolself_link($instance)) {
     redirect(
         new moodle_url(
-            '/course/view.php', array(
+            '/course/view.php',
+            array(
             'id' => $course->id
             )
         )
@@ -61,7 +68,8 @@ if (!$plugin->get_unenrolself_link($instance)) {
 }
 
 $PAGE->set_url(
-    '/enrol/mpcheckoutpro/unenrolself.php', array(
+    '/enrol/mpcheckoutpro/unenrolself.php',
+    array(
     'enrolid' => $instance->id
     )
 );
@@ -75,13 +83,15 @@ if ($confirm and confirm_sesskey()) {
 
 echo $OUTPUT->header();
 $yesurl = new moodle_url(
-    $PAGE->url, array(
+    $PAGE->url,
+    array(
     'confirm' => 1,
     'sesskey' => sesskey()
     )
 );
 $nourl = new moodle_url(
-    '/course/view.php', array(
+    '/course/view.php',
+    array(
     'id' => $course->id
     )
 );

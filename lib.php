@@ -1,5 +1,6 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -8,21 +9,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
- *
- * This files lists lang strings related to enrol_mpcheckoutpro.
+ * This page handles responses from MercadoPago for failed payments.
  *
  * @package   enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -33,7 +33,6 @@ defined('MOODLE_INTERNAL') || die();
  */
 class enrol_mpcheckoutpro_plugin extends enrol_plugin
 {
-
     /**
      * Lists all currencies available for plugin.
      *
@@ -145,7 +144,8 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         $context = context_course::instance($instance->courseid);
         if (has_capability('enrol/mpcheckoutpro:config', $context)) {
             $managelink = new moodle_url(
-                '/enrol/mpcheckoutpro/edit.php', array(
+                '/enrol/mpcheckoutpro/edit.php',
+                array(
                 'courseid' => $instance->courseid,
                 'id' => $instance->id
                 )
@@ -173,14 +173,19 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
 
         if (has_capability('enrol/mpcheckoutpro:config', $context)) {
             $editlink = new moodle_url(
-                "/enrol/mpcheckoutpro/edit.php", array(
+                "/enrol/mpcheckoutpro/edit.php",
+                array(
                 'courseid' => $instance->courseid,
                 'id' => $instance->id
                 )
             );
             $icons[] = $OUTPUT->action_icon(
-                $editlink, new pix_icon(
-                    't/edit', get_string('edit'), 'core', array(
+                $editlink,
+                new pix_icon(
+                    't/edit',
+                    get_string('edit'),
+                    'core',
+                    array(
                     'class' => 'iconsmall'
                     )
                 )
@@ -206,7 +211,8 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
 
         // Multiple instances supported - different cost for different roles.
         return new moodle_url(
-            '/enrol/mpcheckoutpro/edit.php', array(
+            '/enrol/mpcheckoutpro/edit.php',
+            array(
             'courseid' => $courseid
             )
         );
@@ -226,7 +232,8 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         ob_start();
 
         if ($DB->record_exists(
-            'user_enrolments', array(
+            'user_enrolments',
+            array(
                 'userid' => $USER->id,
                 'enrolid' => $instance->id
             )
@@ -244,14 +251,17 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         }
 
         $course = $DB->get_record(
-            'course', array(
+            'course',
+            array(
             'id' => $instance->courseid
             )
         );
         $context = context_course::instance($course->id);
 
         $shortname = format_string(
-            $course->shortname, true, array(
+            $course->shortname,
+            true,
+            array(
             'context' => $context
             )
         );
@@ -298,7 +308,9 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
             } else {
                 // Sanitise some fields before building the payment form.
                 $coursefullname = format_string(
-                    $course->fullname, true, array(
+                    $course->fullname,
+                    true,
+                    array(
                     'context' => $context
                     )
                 );
@@ -380,7 +392,10 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         if ($this->allow_unenrol($instance) && has_capability("enrol/mpcheckoutpro:unenrol", $context)) {
             $url = new moodle_url('/enrol/unenroluser.php', $params);
             $actions[] = new user_enrolment_action(
-                new pix_icon('t/delete', ''), get_string('unenrol', 'enrol'), $url, array(
+                new pix_icon('t/delete', ''),
+                get_string('unenrol', 'enrol'),
+                $url,
+                array(
                 'class' => 'unenrollink',
                 'rel' => $ue->id
                 )
@@ -389,7 +404,10 @@ class enrol_mpcheckoutpro_plugin extends enrol_plugin
         if ($this->allow_manage($instance) && has_capability("enrol/mpcheckoutpro:manage", $context)) {
             $url = new moodle_url('/enrol/editenrolment.php', $params);
             $actions[] = new user_enrolment_action(
-                new pix_icon('t/edit', ''), get_string('edit'), $url, array(
+                new pix_icon('t/edit', ''),
+                get_string('edit'),
+                $url,
+                array(
                 'class' => 'editenrollink',
                 'rel' => $ue->id
                 )

@@ -1,5 +1,6 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -8,24 +9,23 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
- *
- * This files lists lang strings related to enrol_mpcheckoutpro.
+ * This page handles responses from MercadoPago for failed payments.
  *
  * @package   enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die();
 
-require_once $CFG->libdir . '/formslib.php';
+require_once($CFG->libdir . '/formslib.php');
 
 /**
  * Sets up moodle edit form class methods.
@@ -35,7 +35,6 @@ require_once $CFG->libdir . '/formslib.php';
  */
 class enrol_mpcheckoutpro_edit_form extends moodleform
 {
-
     /**
      * Sets up moodle form.
      *
@@ -66,7 +65,10 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
         $mform->setDefault('status', $plugin->get_config('status'));
 
         $mform->addElement(
-            'text', 'cost', get_string('cost', 'enrol_mpcheckoutpro'), array(
+            'text',
+            'cost',
+            get_string('cost', 'enrol_mpcheckoutpro'),
+            array(
             'size' => 4
             )
         );
@@ -74,7 +76,10 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
         $mform->setDefault('cost', format_float($plugin->get_config('cost'), 2, true));
 
         $mform->addElement(
-            'text', 'tax', get_string('tax', 'enrol_mpcheckoutpro'), array(
+            'text',
+            'tax',
+            get_string('tax', 'enrol_mpcheckoutpro'),
+            array(
             'size' => 4
             )
         );
@@ -94,7 +99,10 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
         $mform->setDefault('roleid', $plugin->get_config('roleid'));
 
         $mform->addElement(
-            'duration', 'enrolperiod', get_string('enrolperiod', 'enrol_mpcheckoutpro'), array(
+            'duration',
+            'enrolperiod',
+            get_string('enrolperiod', 'enrol_mpcheckoutpro'),
+            array(
             'optional' => true,
             'defaultunit' => 86400
             )
@@ -103,7 +111,10 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
         $mform->addHelpButton('enrolperiod', 'enrolperiod', 'enrol_mpcheckoutpro');
 
         $mform->addElement(
-            'date_time_selector', 'enrolstartdate', get_string('enrolstartdate', 'enrol_mpcheckoutpro'), array(
+            'date_time_selector',
+            'enrolstartdate',
+            get_string('enrolstartdate', 'enrol_mpcheckoutpro'),
+            array(
             'optional' => true
             )
         );
@@ -111,7 +122,10 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
         $mform->addHelpButton('enrolstartdate', 'enrolstartdate', 'enrol_mpcheckoutpro');
 
         $mform->addElement(
-            'date_time_selector', 'enrolenddate', get_string('enrolenddate', 'enrol_mpcheckoutpro'), array(
+            'date_time_selector',
+            'enrolenddate',
+            get_string('enrolenddate', 'enrol_mpcheckoutpro'),
+            array(
             'optional' => true
             )
         );

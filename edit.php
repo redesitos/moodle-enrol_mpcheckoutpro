@@ -1,5 +1,6 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -8,39 +9,43 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
- *
- * This files lists lang strings related to enrol_mpcheckoutpro.
+ * This page handles responses from MercadoPago for failed payments.
  *
  * @package   enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require '../../config.php';
-require_once 'edit_form.php';
+
+require('../../config.php');
+require_once('edit_form.php');
 
 $courseid = required_param('courseid', PARAM_INT);
 $instanceid = optional_param('id', 0, PARAM_INT);
 
 $course = $DB->get_record(
-    'course', array(
+    'course',
+    array(
     'id' => $courseid
-    ), '*', MUST_EXIST
+    ),
+    '*',
+    MUST_EXIST
 );
 $context = context_course::instance($course->id, MUST_EXIST);
 
 require_login($course);
+
 require_capability('enrol/mpcheckoutpro:config', $context);
 
 $PAGE->set_url(
-    '/enrol/mpcheckoutpro/edit.php', array(
+    '/enrol/mpcheckoutpro/edit.php',
+    array(
     'courseid' => $course->id,
     'id' => $instanceid
     )
@@ -48,7 +53,8 @@ $PAGE->set_url(
 $PAGE->set_pagelayout('admin');
 
 $return = new moodle_url(
-    '/enrol/instances.php', array(
+    '/enrol/instances.php',
+    array(
     'id' => $course->id
     )
 );
@@ -60,11 +66,14 @@ $plugin = enrol_get_plugin('mpcheckoutpro');
 
 if ($instanceid) {
     $instance = $DB->get_record(
-        'enrol', array(
+        'enrol',
+        array(
         'courseid' => $course->id,
         'enrol' => 'mpcheckoutpro',
         'id' => $instanceid
-        ), '*', MUST_EXIST
+        ),
+        '*',
+        MUST_EXIST
     );
     $instance->cost = format_float($instance->cost, 2, true);
     $instance->customint1 = format_float($instance->customint1, 2, true);
@@ -73,7 +82,8 @@ if ($instanceid) {
 
     navigation_node::override_active_url(
         new moodle_url(
-            '/enrol/instances.php', array(
+            '/enrol/instances.php',
+            array(
             'id' => $course->id
             )
         )
@@ -84,7 +94,8 @@ if ($instanceid) {
 }
 
 $mform = new enrol_mpcheckoutpro_edit_form(
-    null, array(
+    null,
+    array(
     $instance,
     $plugin,
     $context
@@ -93,7 +104,7 @@ $mform = new enrol_mpcheckoutpro_edit_form(
 
 if ($mform->is_cancelled()) {
     redirect($return);
-} else if ($data = $mform->get_data()) {
+} elseif ($data = $mform->get_data()) {
     if ($instance->id) {
         $reset = ($instance->status != $data->status);
         $instance->status = $data->status;
