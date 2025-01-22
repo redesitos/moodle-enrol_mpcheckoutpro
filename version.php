@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,12 +26,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version = 2025012226;
-$plugin->requires = 2019052000;
+$plugin->requires = 2022041900;
 $plugin->component = 'enrol_mpcheckoutpro';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = '3.11';
 $plugin->cron = 60;
 $plugin->supported = [
-    37,
+    400,
     405
 ];
