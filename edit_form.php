@@ -48,8 +48,6 @@ class enrol_mpcheckoutpro_edit_form extends moodleform
 
         list($instance, $plugin, $context) = $this->_customdata;
 
-        //$mform->addElement('header', 'header', get_string('pluginname', 'enrol_mpcheckoutpro'));
-
         $pix_icon = $CFG->wwwroot . '/enrol/mpcheckoutpro/pix/icon.png'; // Replace your_icon_name.png with the actual filename
         $mform->addElement('html', '<div class="pix_icon"><img src="' . $pix_icon . '" alt="MP Icon" style="width:5%;" /></div>');
         $mform->addElement('static', 'description', get_string('owner', 'enrol_mpcheckoutpro'), null);

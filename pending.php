@@ -28,16 +28,16 @@ require_once("lib.php");
 global $CFG;
 require_login();
 
-$payment_id = optional_param('payment_id', 0, PARAM_INT);
+$paymentid = optional_param('payment_id', 0, PARAM_INT);
 $status = optional_param('status', 'failed', PARAM_TEXT);
-$external_reference = optional_param('external_reference', 'none', PARAM_TEXT);
-$merchant_order_id = optional_param('merchant_order_id', 0, PARAM_INT);
+$externalreference = optional_param('external_reference', 'none', PARAM_TEXT);
+$merchantorderid = optional_param('merchant_order_id', 0, PARAM_INT);
 
 $a = new stdClass();
-if ($payment_id && $status && $external_reference && $merchant_order_id) {
-    $a->payment_status = "Payment ID: " . $payment_id . ", Status: " . $status .
-        ", External Reference: " . $external_reference .
-        ", Merchant Order ID: " . $merchant_order_id . ", Message: pending confirmation";
+if ($paymentid && $status && $externalreference && $merchantorderid) {
+    $a->payment_status = "Payment ID: " . $paymentid . ", Status: " . $status .
+        ", External Reference: " . $externalreference .
+        ", Merchant Order ID: " . $merchantorderid . ", Message: pending confirmation";
 
 } else {
     $a->payment_status = "MercadoPago callback received with missing parameters. Message: pending confirmation";

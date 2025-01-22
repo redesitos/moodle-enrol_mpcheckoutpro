@@ -23,16 +23,13 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /*
  * Upgrade the untoken oauth2 plugin.
  *
  * @param int $oldversion The old version of the user tours plugin
  * @return bool
  */
-function xmldb_enrol_mpcheckoutpro_upgrade($oldversion)
-{
+function xmldb_enrol_mpcheckoutpro_upgrade($oldversion) {
     // upgrade function.
     if ($oldversion < 20250123266) {
         upgrade_plugin_savepoint(true, 20250123266, 'enrol', 'mpcheckoutpro');

@@ -47,7 +47,7 @@ $PAGE->set_url(
     '/enrol/mpcheckoutpro/edit.php',
     array(
     'courseid' => $course->id,
-    'id' => $instanceid
+    'id' => $instanceid,
     )
 );
 $PAGE->set_pagelayout('admin');
@@ -70,7 +70,7 @@ if ($instanceid) {
         array(
         'courseid' => $course->id,
         'enrol' => 'mpcheckoutpro',
-        'id' => $instanceid
+        'id' => $instanceid,
         ),
         '*',
         MUST_EXIST
@@ -132,7 +132,7 @@ if ($mform->is_cancelled()) {
             'roleid' => $data->roleid,
             'enrolperiod' => $data->enrolperiod,
             'enrolstartdate' => $data->enrolstartdate,
-            'enrolenddate' => $data->enrolenddate
+            'enrolenddate' => $data->enrolenddate,
         );
         $plugin->add_instance($course, $fields);
     }

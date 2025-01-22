@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -9,21 +9,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
- *
- * This files lists lang strings related to enrol_mpcheckoutpro.
+ * This page handles responses from MercadoPago for failed payments.
  *
  * @package   enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 $string['pluginname'] = 'mpcheckoutpro';
 $string['pluginname_desc'] = 'The Mercadopago module allows you to set up paid courses.  If the cost for any course is zero, then students are not asked to pay for entry.  There is a site-wide cost that you set here as a default for the whole site and then a course setting that you can set for each course individually. The course cost overrides the site cost.';
 $string['owner'] = 'innovandoweb';
@@ -62,10 +61,10 @@ $string['enrolstartdate'] = 'Start date';
 $string['enrolstartdate_help'] = 'If enabled, users can be enrolled from this date onward only.';
 $string['expiredaction'] = 'Enrolment expiration action';
 $string['expiredaction_help'] = 'Select action to carry out when user enrolment expires. Please note that some user data and settings are purged from course during course unenrolment.';
-$string['mercadopago:config'] = 'Configure Mercadopago enrol instances';
-$string['mercadopago:manage'] = 'Manage enrolled users';
-$string['mercadopago:unenrol'] = 'Unenrol users from course';
-$string['mercadopago:unenrolself'] = 'Unenrol self from the course (student)';
+$string['mpcheckoutpro:config'] = 'Configure Mercadopago enrol instances';
+$string['mpcheckoutpro:manage'] = 'Manage enrolled users';
+$string['mpcheckoutpro:unenrol'] = 'Unenrol users from course';
+$string['mpcheckoutpro:unenrolself'] = 'Unenrol self from the course (student)';
 $string['status'] = 'Allow mercadopago enrolments';
 $string['status_desc'] = 'Allow users to use mercadopago to enrol into a course by default.';
 $string['unenrolselfconfirm'] = 'Do you really want to unenrol yourself from course "{$a}"?';

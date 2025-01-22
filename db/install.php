@@ -23,13 +23,10 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Sets up installation script.
  *
  * @return void
  */
-function xmldb_enrol_mpcheckoutpro_install()
-{
+function xmldb_enrol_mpcheckoutpro_install() {
 }

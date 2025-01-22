@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -9,17 +9,19 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+// See the GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with Moodle.
+// If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This page handles responses from MercadoPago for failed payments.
+ * Lang strings.
+ *
+ * This files lists lang strings related to enrol_mpcheckoutpro.
  *
  * @package   enrol_mpcheckoutpro
- * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -48,8 +50,7 @@ class provider implements
     \core_privacy\local\request\plugin\provider,
 
     // This plugin is capable of determining which users have data within it.
-    \core_privacy\local\request\core_userlist_provider
-{
+    \core_privacy\local\request\core_userlist_provider {
     /**
      * Returns meta data about this system.
      *
@@ -118,8 +119,8 @@ class provider implements
                   FROM {enrol_mpcheckoutpro} ep
                   JOIN {enrol} e ON ep.instanceid = e.id
                   JOIN {context} ctx ON e.courseid = ctx.instanceid AND ctx.contextlevel = :contextcourse
-                  JOIN {user} u ON u.id = ep.userid 
-                 WHERE u.id = :userid";
+                  JOIN {user} u ON u.id = ep.userid
+                  WHERE u.id = :userid";
         $params = [
             'contextcourse' => CONTEXT_COURSE,
             'userid' => $userid
@@ -149,7 +150,7 @@ class provider implements
         $sql = "SELECT u.id
                   FROM {enrol_mpcheckoutpro} ep
                   JOIN {enrol} e ON ep.instanceid = e.id
-                  JOIN {user} u ON ep.userid = u.id 
+                  JOIN {user} u ON ep.userid = u.id
                  WHERE e.courseid = :courseid";
         $params = [
             'courseid' => $context->instanceid
@@ -182,7 +183,7 @@ class provider implements
                   FROM {enrol_mpcheckoutpro} ep
                   JOIN {enrol} e ON ep.instanceid = e.id
                   JOIN {context} ctx ON e.courseid = ctx.instanceid AND ctx.contextlevel = :contextcourse
-                  JOIN {user} u ON u.id = ep.userid 
+                  JOIN {user} u ON u.id = ep.userid
                  WHERE ctx.id {$contextsql} AND u.id = :userid
               ORDER BY e.courseid";
 

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -9,21 +9,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with Moodle.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Lang strings.
- *
- * This files lists lang strings related to enrol_mpcheckoutpro.
+ * This page handles responses from MercadoPago for failed payments.
  *
  * @package   enrol_mpcheckoutpro
- * @copyright 2019 Jonathan López <jonathan.lopez.garcia@gmail.com>
+ * @copyright 2020 Jonathan López <jonathan.lopez.garcia@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 $string['pluginname'] = 'mpcheckoutpro';
 $string['pluginname_desc'] = 'El m&oacute;dulo Mercadopago le permite configurar cursos gestionando su matriculaci&oacute;n mediante un pago, si el costo de cualquier curso es cero, no se les pedir&aacute; a los estudiantes realizar pago por la entrada, en general para todo el sitio se puede establecer&aacute;n valor como predeterminado, tenga en cuenta que la configuraci&oacute;n en cada curso anula el costo definido para el sitio.';
 $string['owner'] = 'innovandoweb';
@@ -57,10 +56,10 @@ $string['enrolstartdate'] = 'Fecha de inicio';
 $string['enrolstartdate_help'] = 'Si se activa los usuarios pueden matricularse desde esta fecha solamente';
 $string['expiredaction'] = 'Acciones sobre la expiraci&oacute;n de la matricula';
 $string['expiredaction_help'] = 'Durante la desmatriculaci&oacute;n se borrar&aacute;n los aportes de los usuarios';
-$string['mercadopago:config'] = 'Configure la instancia de matriculaci&oacute;n mercadopago';
-$string['mercadopago:manage'] = 'Administrar usuarios matriculados';
-$string['mercadopago:unenrol'] = 'Desmatricular usuarios del curso';
-$string['mercadopago:unenrolself'] = 'Des-inscribirse (darse de baja) de baja del curso';
+$string['mpcheckoutpro:config'] = 'Configure la instancia de matriculaci&oacute;n mercadopago';
+$string['mpcheckoutpro:manage'] = 'Administrar usuarios matriculados';
+$string['mpcheckoutpro:unenrol'] = 'Desmatricular usuarios del curso';
+$string['mpcheckoutpro:unenrolself'] = 'Des-inscribirse (darse de baja) de baja del curso';
 $string['status_desc'] = 'Permitir a los usuarios matricularse en un curso mediante mercadopago';
 $string['unenrolselfconfirm'] = '¿Realmente desea desmtricularse del curso "{$a}"?';
 $string['status'] = 'Permitir Matriculaci&oacute;n mercadopago';
