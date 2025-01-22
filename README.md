@@ -4,7 +4,7 @@ This plugin helps admins and webmasters use mercadopago as the payment gateway.
 
 mercadopago.co is one of the most commonly used payment gateways in India offers considerable number of features unsupported by other payment gateways like Paypal. This plugin has all the settings for development as well as for production usage. Its easy to install, set up and effective.
 
-## Supported Versions 3.7 3.8 3.9 3.10 3.11 4.0 4.1 4.2 4.3 4.4 4.5 ##
+## Supported Versions 4.0 4.1 4.2 4.3 4.4 4.5 ##
 
 Installation Guidence : 
 
