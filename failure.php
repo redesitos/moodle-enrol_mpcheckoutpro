@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -38,9 +39,16 @@ $a = new stdClass();
 if ($paymentid && $status && $externalreference && $merchantorderid) {
     $a->payment_status = "Payment ID: " . $paymentid . ", Status: " . $status .
         ", External Reference: " . $externalreference .
-        ", Merchant Order ID: " . $merchantorderid . ", Message: pending confirmation";
+        ", Merchant Order ID: " . $merchantorderid . 
+        get_string('msgpending', 'enrol_mpcheckoutpro');
 
 } else {
-    $a->payment_status = "MercadoPago callback received with missing parameters. Message: failed payment";
+    $a->payment_status = get_string('paymentreject', 'enrol_mpcheckoutpro');
 }
-redirect($CFG->wwwroot . '/my', get_string('paymentreject', 'enrol_mpcheckoutpro', $a));
+redirect($CFG->wwwroot . '/my', 
+    get_string(
+        'paymentreject', 
+        'enrol_mpcheckoutpro', 
+        $a
+    )
+);

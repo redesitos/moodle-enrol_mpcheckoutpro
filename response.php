@@ -36,13 +36,22 @@ $status = optional_param('status', 'failed', PARAM_TEXT);
 $extref = optional_param('external_reference', 'none', PARAM_TEXT);
 $prefid = optional_param('preference_id', 'none', PARAM_TEXT);
 $mcorid = optional_param('merchant_order_id', 0, PARAM_INT);
-$pysts = optional_param('collection_status', 'pending', PARAM_TEXT);
+$pysts = optional_param('collection_status', '', PARAM_TEXT);
+$token = optional_param('token', '', PARAM_TEXT);
+
+if (empty($token) || $token !== $_SESSION['mpcheckoutpro_token']) {
+    throw new moodle_exception('invalidtoken', 'error');   
+}
+
+unset($_SESSION['mpcheckoutpro_token']);
 
 if (!empty($pysts)) {
     if ($pysts != "approved" || $status != "approved") {
         $a = new stdClass();
         $a->payment_status = $pysts;
-        redirect($CFG->wwwroot . '/my', get_string('paymentsorry', 'enrol_mpcheckoutpro', $a));
+        $redirecturl = $CFG->wwwroot . '/my';
+        $message = get_string('paymentsorry', 'enrol_mpcheckoutpro', $a);
+        redirect($redirecturl, $message);
     }
 }
 
@@ -79,27 +88,70 @@ if ($status == "approved" && $pysts == "approved" && $extref != "none") {
                 $record->timeupdated = time();
 
                 if ($newid = $DB->insert_record('enrol_mpcheckoutpro', $record, true)) {
-                    // Success! $newid now holds the ID of the inserted record.
-                    redirect(new moodle_url('update.php', array(
-                        'id' => $newid
-                    )), get_string('paymentconfirm', 'enrol_mpcheckoutpro', $record), 10);
-
+                    redirect(
+                        new moodle_url(
+                            'update.php',
+                            array('id' => $newid)
+                        ),
+                        get_string('paymentconfirm', 'enrol_mpcheckoutpro', $record),
+                        10
+                    );
                 } else {
                     throw new Exception('not insert record for enrol');
-                    // Insertion failed. Handle the error.
                 }
             }
         } else {
             $a = new stdClass();
-            $a->payment_status = "MercadoPago callback received with missing parameters. Message: failed payment";
+            $a->payment_status = get_string(
+                'errnoparameters', 
+                'enrol_mpcheckoutpro'
+            );
         }
     } catch (Exception $e) {
         throw new Exception($e);
     }
 } else {
     $a = new stdClass();
+    $eventdata = new \core\message\message();
+
     $a->payment_status = "Payment ID: " . $payid . ", Status: " . $status .
         ", External Reference: " . $extref .
-        ", Merchant Order ID: " . $mcorid . ", Message: pending confirmation";
-    redirect($CFG->wwwroot . '/my', get_string('paymentsorry', 'enrol_mpcheckoutpro', $a));
+        ", Merchant Order ID: " . $mcorid . get_string(
+            'msgpending', 
+            'enrol_mpcheckoutpro'
+        );
+    
+    try {
+        list($courseid, $userid, $instanceid, $contextid) = explode("-", $extref);
+        if (!is_null($userid)) {
+            $usercriteria = array(
+                'id' => $userid,
+                'deleted' => 0
+            );
+            $recipient = $DB->get_record('user', $usercriteria, '*', MUST_EXIST);
+            $eventdata->component = 'enrol_mpcheckoutpro';
+            $eventdata->name = 'mpcheckoutpro_enrolment';
+            $eventdata->userfrom = core_user::get_support_user();
+            $eventdata->userto = $recipient;
+            $eventdata->subject = get_string('notiferr', 'enrol_mpcheckoutpro');
+            $eventdata->fullmessage = get_string(
+                'notifdetailerror', 
+                'enrol_mpcheckoutpro'
+            );
+            $eventdata->fullmessageformat = FORMAT_PLAIN;
+            $eventdata->notification = 1;
+            message_send($eventdata);
+        }
+    } catch (Exception $e) {
+        throw new Exception($e);
+    }
+
+    redirect(
+        $CFG->wwwroot . '/my',
+        get_string(
+            'paymentsorry',
+            'enrol_mpcheckoutpro',
+            $a
+        )        
+    );
 }

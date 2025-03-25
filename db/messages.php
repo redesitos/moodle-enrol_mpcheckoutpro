@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,5 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $messageproviders = array(
-    'enrolment' => array(),
+    'mpcheckoutpro_enrolment' => array(
+        'capability' => 'enrol/mpcheckoutpro:receivemessages',
+    ),
 );

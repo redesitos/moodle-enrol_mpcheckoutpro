@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -27,5 +28,6 @@
  *
  * @return void
  */
-function xmldb_enrol_mpcheckoutpro_install() {
+function xmldb_enrol_mpcheckoutpro_install()
+{
 }

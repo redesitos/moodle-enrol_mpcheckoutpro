@@ -134,7 +134,7 @@ $fullname = format_string(
     )
 );
 
-if (is_enrolled($context, $user, '', true)) { // TODO: use real pay check
+if (is_enrolled($context, $user, '', true)) {
     redirect(
         new moodle_url(
             '/course/view.php',
@@ -144,7 +144,7 @@ if (is_enrolled($context, $user, '', true)) { // TODO: use real pay check
         ),
         get_string('paymentthanks', '', $fullname)
     );
-} else { // / Somehow they aren't enrolled yet! :-(
+} else {
     $PAGE->set_url($destination);
     echo $OUTPUT->header();
     $a = new stdClass();

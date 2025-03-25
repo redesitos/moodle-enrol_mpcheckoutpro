@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -55,5 +56,16 @@ $capabilities = array(
         'archetypes' => array(
             'student' => CAP_ALLOW
         )
-    )
+        ),
+    
+    'enrol/mpcheckoutpro:receivemessages' => array(
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'manager' => CAP_ALLOW,
+            'teacher' => CAP_ALLOW,
+            'student' => CAP_ALLOW,
+        ),
+    ),
 );

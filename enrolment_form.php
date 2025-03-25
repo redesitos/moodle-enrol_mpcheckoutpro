@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -26,10 +27,14 @@ defined('MOODLE_INTERNAL') || die();
 
 require_login();
 
+if (!isset($_SESSION['mpcheckoutpro_token'])) {
+    $_SESSION['mpcheckoutpro_token'] = bin2hex(random_bytes(32));
+}
+
 global $DB, $USER, $CFG;
 
-$accesstoken = $this->get_config('AccessToken');
-$publickey = $this->get_config('PublicKey');
+$accesstoken = $this->get_config('accesstoken');
+$publickey = $this->get_config('publickey');
 $sdk = $this->get_config('sdk');
 $ipn = $this->get_config('ipn');
 
@@ -88,10 +93,11 @@ if ($item->currency_id == 'COP') {
 $preference->external_reference = $extra1;
 $preference->notification_url = $ipn;
 
+$token = $_SESSION['mpcheckoutpro_token'];
 $preference->back_urls = array(
-    "success" => $CFG->wwwroot . '/enrol/mpcheckoutpro/response.php',
-    "failure" => $CFG->wwwroot . '/enrol/mpcheckoutpro/failure.php',
-    "pending" => $CFG->wwwroot . '/enrol/mpcheckoutpro/pending.php',
+    "success" => $CFG->wwwroot . '/enrol/mpcheckoutpro/response.php?token=' . $token,
+    "failure" => $CFG->wwwroot . '/enrol/mpcheckoutpro/failure.php?token=' . $token,
+    "pending" => $CFG->wwwroot . '/enrol/mpcheckoutpro/pending.php?token=' . $token,
 );
 
 $preference->auto_return = "approved";
@@ -99,7 +105,7 @@ $preference->items = array($item);
 $preference->payer = $payer;
 
 $preference->payment_methods = array(
-    "excluded_payment_methods" => array(
+   "excluded_payment_methods" => array(
         array("id" => "master")
     ),
     "excluded_payment_types" => array(
