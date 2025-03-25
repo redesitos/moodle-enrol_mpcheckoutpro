@@ -32,6 +32,13 @@ global $DB, $CFG;
 require_login();
 
 $id = required_param('id', PARAM_INT);
+$token = optional_param('token', '', PARAM_TEXT);
+
+if (empty($token) || $token !== $_SESSION['update_token']) {
+    throw new moodle_exception('invalidtoken', 'error');   
+}
+
+unset($_SESSION['update_token']);
 
 $enrolmpcpro = $DB->get_record(
     "enrol_mpcheckoutpro",
