@@ -29,7 +29,7 @@ $plugin->version = 2025032501;
 $plugin->requires = 2022041900;
 $plugin->component = 'enrol_mpcheckoutpro';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '0.1.2';
+$plugin->release = '0.1.3';
 $plugin->cron = 60;
 $plugin->supported = [
     400,
