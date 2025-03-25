@@ -59,6 +59,10 @@ if ($status == "approved" && $pysts == "approved" && $extref != "none") {
     try {
         list($courseid, $userid, $instanceid, $contextid) = explode("-", $extref);
 
+        if (!isset($_SESSION['update_token'])) {
+            $_SESSION['update_token'] = bin2hex(random_bytes(32));
+        }
+        
         if (!is_null($courseid) && !is_null($userid)) {
 
             if ($DB->record_exists(
@@ -86,12 +90,16 @@ if ($status == "approved" && $pysts == "approved" && $extref != "none") {
                 $record->payment_status = $pysts;
                 $record->external_reference = $extref;
                 $record->timeupdated = time();
-
+                $token = $_SESSION['update_token'];
+                
                 if ($newid = $DB->insert_record('enrol_mpcheckoutpro', $record, true)) {
                     redirect(
                         new moodle_url(
                             'update.php',
-                            array('id' => $newid)
+                            array(
+                                'id' => $newid,
+                                'token' => $token
+                            )
                         ),
                         get_string('paymentconfirm', 'enrol_mpcheckoutpro', $record),
                         10
