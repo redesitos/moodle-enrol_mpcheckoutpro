@@ -66,6 +66,7 @@ $string['mpcheckoutpro:config'] = 'Configure Mercadopago enrol instances';
 $string['mpcheckoutpro:manage'] = 'Manage enrolled users';
 $string['mpcheckoutpro:unenrol'] = 'Unenrol users from course';
 $string['mpcheckoutpro:unenrolself'] = 'Unenrol self from the course (student)';
+$string['mpcheckoutpro:receivemessages'] = 'Receive MercadoPago messages';
 $string['status'] = 'Allow mercadopago enrolments';
 $string['status_desc'] = 'Allow users to use mercadopago to enrol into a course by default.';
 $string['unenrolselfconfirm'] = 'Do you really want to unenrol yourself from course "{$a}"?';
