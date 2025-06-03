@@ -100,7 +100,7 @@ class enrol_mpcheckoutpro_external extends external_api {
                 throw new invalid_parameter_exception('User id not exist: ' . $enrolment['userid']);
             }
             if (!$enrol->allow_unenrol($instance)) {
-                throw new moodle_exception('wscannotunenrol', 'enrol_manual', '', $enrolment);
+                throw new moodle_exception('wscannotenrol', 'enrol_manual', '', $enrolment);
             }
             $enrol->unenrol_user($instance, $enrolment['userid']);
         }

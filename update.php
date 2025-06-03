@@ -35,7 +35,7 @@ $id = required_param('id', PARAM_INT);
 $token = optional_param('token', '', PARAM_TEXT);
 
 if (empty($token) || $token !== $_SESSION['update_token']) {
-    throw new moodle_exception('invalidtoken', 'error');   
+    throw new moodle_exception('invalidkey', 'error');   
 }
 
 unset($_SESSION['update_token']);
