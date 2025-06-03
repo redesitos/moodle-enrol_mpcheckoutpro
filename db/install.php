@@ -28,6 +28,4 @@
  *
  * @return void
  */
-function xmldb_enrol_mpcheckoutpro_install()
-{
-}
+function xmldb_enrol_mpcheckoutpro_install(){}
