@@ -31,8 +31,8 @@
  */
 function xmldb_enrol_mpcheckoutpro_upgrade($oldversion) {
     // upgrade function.
-    if ($oldversion < 2025032502) {
-        upgrade_plugin_savepoint(true, 2025032502, 'enrol', 'mpcheckoutpro');
+    if ($oldversion < 2025032503) {
+        upgrade_plugin_savepoint(true, 2025032503, 'enrol', 'mpcheckoutpro');
     }
 
     return true;
